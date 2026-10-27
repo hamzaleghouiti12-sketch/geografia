@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Geografía · Relieve</title>
+<meta name="description" content="Conceptos, mapas y comentario de paisaje para el examen de Geografía de 2.º de Bachillerato.">
+<meta name="theme-color" content="#f6f3fb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Geografía">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<div class="fondo" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+<main class="app">
+  <!-- INICIO -->
+  <section class="vista on t-lavanda" id="v-inicio">
+    <div class="glass hero">
+      <span class="cab"><span class="eti">Examen · 28 de octubre</span></span>
+      <h1>Geografía: <span>el relieve de España</span></h1>
+      <div class="nota-total">
+        <div class="anillo" id="anillo-total"><div><b id="nota-total">0</b><small>de 10</small></div></div>
+        <p class="mut peq">Nota estimada según lo que dominas en cada pregunta. Cada bloque vale <b>2,5 puntos</b>; el anillo se llena a medida que practicas.</p>
+      </div>
+    </div>
+    <div class="bloques" id="bloques"></div>
+    <p class="mut peq" style="padding:0 6px">Contenido en borrador hecho con los apuntes en sucio. Se sustituye por los apuntes pulidos en cuanto lleguen.</p>
+  </section>
+
+  <!-- CONCEPTOS -->
+  <section class="vista t-lavanda" id="v-conceptos">
+    <header class="cab"><span class="eti">Pregunta de conceptos · 2,5 puntos</span><h2>Conceptos del bloque I</h2>
+      <p>Diez conceptos en el examen, 0,25 cada uno. Primero las tarjetas para memorizar; después escríbelos como en el examen.</p></header>
+    <div class="glass seg" id="seg-conceptos" role="tablist">
+      <span class="pill"></span>
+      <button role="tab" data-m="tarjetas" aria-selected="true">Tarjetas</button>
+      <button role="tab" data-m="escribir" aria-selected="false">Escribir</button>
+      <button role="tab" data-m="examen" aria-selected="false">Examen de 10</button>
+    </div>
+    <div class="chips desliza" id="grupos-conceptos"></div>
+    <div id="zona-conceptos"></div>
+  </section>
+
+  <!-- MAPAS -->
+  <section class="vista t-cielo" id="v-mapas">
+    <header class="cab"><span class="eti" id="eti-mapa">Localización · 2 × 2,5 puntos</span><h2 id="tit-mapa">Mapas</h2>
+      <p id="desc-mapa"></p></header>
+    <div class="glass seg" id="seg-mapas" role="tablist">
+      <span class="pill"></span>
+      <button role="tab" data-m="politico" aria-selected="true">Político</button>
+      <button role="tab" data-m="fisico" aria-selected="false">Físico</button>
+      <button role="tab" data-m="coord" aria-selected="false">Coordenadas</button>
+      <button role="tab" data-m="escala" aria-selected="false">Escalas</button>
+    </div>
+    <div class="chips desliza" id="sub-mapas"></div>
+    <div id="zona-mapas" style="display:grid;gap:14px"></div>
+  </section>
+
+  <!-- COMENTARIO -->
+  <section class="vista t-melocoton" id="v-comentario">
+    <header class="cab"><span class="eti">Comentario de paisaje · 2,5 puntos</span><h2>Paisaje del Tajogaite</h2>
+      <p>a) Clasificación y tipología (0,5) · b) Comentario (2). Aprende el guion, escribe tu versión y comprueba qué ideas clave te faltan.</p></header>
+    <div id="zona-comentario" style="display:grid;gap:14px"></div>
+  </section>
+</main>
+
+<nav class="glass tabbar" id="tabbar" role="tablist" aria-label="Secciones">
+  <span class="pill" aria-hidden="true"></span>
+  <button class="tab" role="tab" data-v="inicio" aria-selected="true" style="--c:var(--lavanda)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3.5 11 12 4.5l8.5 6.5v8.5h-5.5v-5.5h-6v5.5H3.5z"/></svg>Inicio</button>
+  <button class="tab" role="tab" data-v="conceptos" aria-selected="false" style="--c:var(--lavanda)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="4" y="6" width="12" height="15" rx="3"/><path d="M8 3h9a3 3 0 0 1 3 3v12"/></svg>Conceptos</button>
+  <button class="tab" role="tab" data-v="mapas" aria-selected="false" style="--c:var(--cielo)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="m3 6 6-2.5 6 2.5 6-2.5v14.5l-6 2.5-6-2.5-6 2.5z"/><path d="M9 3.5v14.5M15 6v14.5"/></svg>Mapas</button>
+  <button class="tab" role="tab" data-v="comentario" aria-selected="false" style="--c:var(--melocoton)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 20 4.5-1 11-11a2.1 2.1 0 0 0-3-3l-11 11z"/><path d="M14 6.5l3 3"/><path d="M13 20h8"/></svg>Comentario</button>
+</nav>
+<div class="glass toast" id="toast" role="status"></div>
+
+<script src="datos.js"></script>
+<script src="datos-mapa.js"></script>
+<script src="app.js"></script>
+<script src="mapa.js"></script>
+<script>
+  if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js');
+</script>
+</body>
+</html>
