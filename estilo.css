@@ -161,6 +161,17 @@ button{font:inherit;color:inherit}
 .carta-fecha{display:grid;gap:14px;animation:pop .5s var(--muelle)}
 .carta-fecha .grupo{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--c)}
 .carta-fecha h2{font-size:clamp(1.25rem,5vw,1.6rem);line-height:1.3}
+.sucesos,.cronologia{display:grid;gap:8px}
+.cronologia{list-style:none;margin:0;padding:0}
+.cronologia .vacio{padding:14px;border-radius:14px;border:2px dashed var(--linea);color:var(--tinta-2);font-size:.9rem;text-align:center}
+.suceso{width:100%;border:0;cursor:pointer;text-align:left;display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:14px;font:inherit;line-height:1.4;
+  color:var(--tinta);background:rgb(255 255 255 / .72);box-shadow:inset 0 0 0 1px var(--linea);animation:pop .45s var(--muelle);transition:transform .3s var(--muelle)}
+.suceso:active{transform:scale(.97)}
+.cronologia .suceso{background:var(--c-s)}
+.cronologia .suceso.ok{background:var(--ok-s)} .cronologia .suceso.mal{background:var(--mal-s)}
+.suceso:disabled{cursor:default}
+.suceso .num{flex:none;display:grid;place-items:center;width:1.7em;height:1.7em;border-radius:50%;background:var(--c);color:#fff;font-weight:700;font-size:.85rem}
+.suceso .fecha{display:block;margin-top:4px;font-size:.82rem;font-weight:700;color:var(--tinta-2)}
 .carta-fecha input{font-size:1.4rem;font-family:var(--f-titulo);font-variant-numeric:tabular-nums;letter-spacing:.04em}
 .cara .pista{color:var(--tinta-3);font-size:.85rem}
 .cara .def{font-size:1.04rem;line-height:1.55}

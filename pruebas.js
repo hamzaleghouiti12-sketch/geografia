@@ -64,8 +64,25 @@ for (const f of FECHAS) {
   if (!f.x || !f.f) mal('Falta la explicación o la fecha completa en ' + f.id);
   if (!f.f.includes(String(f.a[0]))) mal('La fecha completa no coincide con el año en ' + f.id);
 }
+// 11. Ordenar: cada sub-bloque tiene etapa válida, 4-8 sucesos, el texto no chiva el año y las fechas no retroceden
+const idsO = new Set();
+for (const b of ORDEN) {
+  if (idsO.has(b.id)) mal('Bloque repetido: ' + b.id); idsO.add(b.id);
+  if (!ETAPAS.some(e => e.id === b.e)) mal('Etapa desconocida en el bloque ' + b.id);
+  if (b.s.length < 4 || b.s.length > 8) mal('El bloque ' + b.id + ' debe tener entre 4 y 8 sucesos');
+  if (new Set(b.s.map(x => x[0])).size !== b.s.length) mal('Suceso repetido en ' + b.id);
+  let antes = 0;
+  for (const [t, f] of b.s) {
+    if (/1[78]\d\d/.test(t)) mal('El suceso chiva el año: ' + t);
+    const y = Number((f.match(/\d{4}/) || [])[0]);
+    if (!y) mal('Fecha sin año en ' + b.id + ': ' + t);
+    if (y < antes) mal('Orden roto en ' + b.id + ': «' + t + '» va antes que el anterior');
+    antes = y;
+  }
+}
+for (const e of ETAPAS) if (!ORDEN.some(b => b.e === e.id)) mal('La etapa ' + e.n + ' no tiene bloques para ordenar');
 for (const e of ETAPAS) if (FECHAS.filter(f => f.e === e.id).length < 5) mal('Pocas fechas en la etapa ' + e.n);
 if (!nfc(fs.readFileSync(__dirname + '/datos-historia.js', 'utf8'))) mal('datos-historia.js no está en NFC');
 
 if (errores.length) { console.log(errores.join('\n')); console.log(`\n${errores.length} fallo(s): no se puede publicar`); process.exit(1); }
-console.log(`Todo correcto: ${CONCEPTOS.length} conceptos, ${UNIDADES.length} unidades, ${MAPA.prov.length} provincias, ${FECHAS.length} fechas de Historia. Se puede publicar.`);
+console.log(`Todo correcto: ${CONCEPTOS.length} conceptos, ${UNIDADES.length} unidades, ${MAPA.prov.length} provincias, ${FECHAS.length} fechas y ${ORDEN.length} bloques de Historia. Se puede publicar.`);

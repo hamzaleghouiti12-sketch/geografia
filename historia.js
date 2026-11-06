@@ -1,7 +1,8 @@
-// Historia: tarjetas de fechas. Se describe el suceso y se escribe el año (o los dos años de una etapa).
+// Historia: dos modos. Fechas: tarjetas de fechas. Se describe el suceso y se escribe el año (o los dos años de una etapa).
+// Ordenar: los sucesos de un sub-bloque se colocan en orden cronológico (más abajo).
 // Lo fallado vuelve a salir tres tarjetas después; la nota cuenta solo el primer intento.
 
-const H = { etapa: 'todas', cola: [], i: 0, ok: 0, vistas: new Set(), fallos: [] };
+const H = { modo: 'fechas', etapa: 'todas', cola: [], i: 0, ok: 0, vistas: new Set(), fallos: [] };
 const añosDe = t => (String(t).match(/\d{4}/g) || []).map(Number);
 const igual = (x, y) => x.length === y.length && x.every((v, i) => v === y[i]);
 
@@ -69,9 +70,69 @@ function finHistoria() {
       H.fallos.length ? h('button', { class: 'btn', onclick: () => empezarHistoria(H.fallos) }, 'Repetir los fallos') : null,
       h('button', { class: H.fallos.length ? 'btn sec' : 'btn', onclick: () => empezarHistoria() }, 'Otra vuelta'))));
 }
-chipsUnaOpcion($('#etapas-historia'), [['todas', 'Todas'], ...ETAPAS.map((e, i) => [e.id, `${i + 1}. ${e.corto}`])], H.etapa, id => { H.etapa = id; pintarEtapa(); empezarHistoria(); });
+// ---------- Ordenar: los sucesos de cada sub-bloque se tocan en el orden en que ocurrieron ----------
+const O = { lista: [], i: 0 };
+function empezarOrden() {
+  O.lista = ORDEN.filter(b => H.etapa === 'todas' || b.e === H.etapa);
+  O.i = 0; bloqueOrden();
+}
+function bloqueOrden() {
+  const b = O.lista[O.i], etapa = ETAPAS.find(e => e.id === b.e);
+  const todos = b.s.map((_, k) => k);
+  let quedan; do quedan = barajar(todos); while (quedan.every((v, k) => v === k));
+  const puestos = [];
+  let comprobado = false;
+  const bandeja = h('div', { class: 'sucesos' }), lista = h('ol', { class: 'cronologia' });
+  const res = h('div', { style: 'display:grid;gap:12px' });
+  const btn = h('button', { class: 'btn', disabled: true, onclick: comprobar }, 'Comprobar');
+  const pintar = () => {
+    lista.replaceChildren(...(puestos.length ? puestos.map((k, pos) => h('li', {}, h('button', {
+      class: 'suceso' + (comprobado ? (k === pos ? ' ok' : ' mal') : ''), disabled: comprobado,
+      onclick: () => { puestos.splice(pos, 1); quedan.push(k); pintar(); } },
+      h('span', { class: 'num' }, pos + 1), h('span', {}, b.s[k][0],
+        comprobado ? h('span', { class: 'fecha' }, b.s[k][1] + (k === pos ? '' : ` · va en el puesto ${k + 1}`)) : null))))
+      : [h('li', { class: 'vacio' }, 'Toca abajo el suceso que ocurrió primero.')]));
+    bandeja.replaceChildren(...quedan.map(k => h('button', { class: 'suceso', onclick: () => {
+      quedan = quedan.filter(x => x !== k); puestos.push(k); pintar(); } }, b.s[k][0])));
+    bandeja.style.display = quedan.length ? '' : 'none';
+    btn.disabled = !!quedan.length && !comprobado;
+  };
+  function comprobar() {
+    if (comprobado) return siguiente();
+    comprobado = true;
+    const bien = puestos.filter((k, pos) => k === pos).length, todo = bien === b.s.length;
+    anotar('orden', b.id, todo);
+    if (todo) chispasEn(btn); else temblar(lista);
+    pintar();
+    res.replaceChildren(...[
+      h('div', { class: 'veredicto ' + (todo ? 'ok' : bien >= b.s.length / 2 ? 'medio' : 'mal') },
+        h('b', {}, todo ? '¡Orden perfecto!' : `${bien} de ${b.s.length} en su sitio`),
+        h('span', { class: 'peq' }, todo ? 'Debajo de cada suceso tienes su fecha.' : 'En rojo, los que están fuera de sitio y el puesto que les toca.')),
+      !todo ? h('div', { class: 'datos' }, b.s.map(([t, f]) => h('div', { class: 'dato' }, h('b', {}, f), h('span', {}, t)))) : null,
+      h('div', { class: 'fila' },
+        h('button', { class: todo ? 'btn sec' : 'btn', onclick: bloqueOrden }, 'Otra vez'),
+        h('button', { class: todo ? 'btn' : 'btn sec', onclick: siguiente }, O.lista.length > 1 ? 'Siguiente bloque' : 'Volver a empezar'))].filter(Boolean));
+    btn.style.display = 'none';
+  }
+  function siguiente() { O.i = (O.i + 1) % O.lista.length; bloqueOrden(); }
+  $('#zona-historia').replaceChildren(h('div', { class: 'glass tarjeta carta-fecha' },
+    h('div', { class: 'contador' }, h('span', {}, `Bloque ${O.i + 1} de ${O.lista.length}`),
+      h('span', {}, ['Nuevo', 'Flojo', 'Casi', 'Dominado'][P.orden[b.id] ?? 0])),
+    h('span', { class: 'grupo' }, etapa.corto),
+    h('h2', {}, b.n),
+    h('p', { class: 'mut peq', style: 'margin:0' }, 'Ordena los sucesos del más antiguo al más reciente. Toca uno ya colocado para devolverlo.'),
+    lista, bandeja, h('div', { class: 'fila' }, btn), res));
+  pintar();
+}
+
+function empezarModo() { H.modo === 'ordenar' ? empezarOrden() : empezarHistoria(); }
+chipsUnaOpcion($('#etapas-historia'), [['todas', 'Todas'], ...ETAPAS.map((e, i) => [e.id, `${i + 1}. ${e.corto}`])], H.etapa, id => { H.etapa = id; pintarEtapa(); empezarModo(); });
+segmentado($('#seg-historia'), m => { H.modo = m; pintarEtapa(); empezarModo(); });
 function pintarEtapa() {
   const e = ETAPAS.find(x => x.id === H.etapa);
-  $('#etapa-historia').textContent = e ? `${e.n} (${e.años}) · ${FECHAS.filter(f => f.e === e.id).length} fechas` : `Las seis etapas mezcladas · tandas de 25 de las ${FECHAS.length} fechas, primero las que menos dominas`;
+  if (H.modo === 'ordenar') {
+    const n = ORDEN.filter(b => !e || b.e === e.id).length;
+    $('#etapa-historia').textContent = e ? `${e.n} (${e.años}) · ${n} bloques de sucesos` : `Las seis etapas seguidas · ${n} bloques de sucesos`;
+  } else $('#etapa-historia').textContent = e ? `${e.n} (${e.años}) · ${FECHAS.filter(f => f.e === e.id).length} fechas` : `Las seis etapas mezcladas · tandas de 25 de las ${FECHAS.length} fechas, primero las que menos dominas`;
 }
 pintarEtapa(); empezarHistoria();

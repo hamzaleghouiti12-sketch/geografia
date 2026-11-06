@@ -136,3 +136,139 @@ window.FECHAS = [
   { id: 'ayacucho', e: 'america', p: 'Batalla de Ayacucho, ganada por Sucre: independencia definitiva de Perú, el último baluarte español.', a: [1824], f: '9 de diciembre de 1824',
     x: 'Fin del imperio español en el continente. España solo conserva las Antillas y Filipinas.' },
 ];
+
+// ---------- MODO ORDENAR ----------
+// Cada etapa se divide en sub-bloques; los sucesos de cada uno están YA en orden cronológico.
+// [suceso, fecha que se enseña al corregir]. El suceso no lleva el año (si no, el orden sería regalado).
+window.ORDEN = [
+  // 1. La crisis de la monarquía borbónica
+  { id: 'b-revfr', e: 'borbonica', n: 'Carlos IV ante la Revolución Francesa', s: [
+    ['Carlos IV sube al trono', '1788'],
+    ['Estalla la Revolución Francesa', '1789'],
+    ['Floridablanca levanta un «cordón sanitario ideológico» y se apoya en la Inquisición', '1789 – 1792'],
+    ['El conde de Aranda abre una etapa de coexistencia con Francia', 'Febrero de 1792'],
+    ['Ascenso de Godoy: Carlos IV lo pone al frente del gobierno', 'Noviembre de 1792'],
+    ['Ejecución de Luis XVI y entrada de España en la I Coalición antifrancesa (Guerra de la Convención)', '1793'],
+    ['Paz de Basilea: España pierde Santo Domingo y vuelve a aliarse con Francia', '1795'],
+  ] },
+  { id: 'b-alianza', e: 'borbonica', n: 'La alianza con Francia contra Gran Bretaña', s: [
+    ['Tratado de San Ildefonso', '1796'],
+    ['Derrota naval del cabo de San Vicente', 'Febrero de 1797'],
+    ['Napoleón da un golpe de Estado y proclama el Consulado', 'Noviembre de 1799'],
+    ['Guerra de las Naranjas contra Portugal y conquista de Olivenza', '1801'],
+    ['Hambruna en Castilla por las malas cosechas', '1804'],
+    ['Nelson derrota a la flota franco-española en Trafalgar', 'Octubre de 1805'],
+  ] },
+  { id: 'b-caida', e: 'borbonica', n: 'La caída de Carlos IV', s: [
+    ['Tratado de Fontainebleau: las tropas de Napoleón entran en España camino de Portugal', 'Octubre de 1807'],
+    ['Motín de Aranjuez: cae Godoy y Carlos IV abdica en su hijo Fernando', 'Marzo de 1808'],
+    ['Abdicaciones de Bayona: la Corona pasa a Napoleón', 'Mayo de 1808'],
+    ['José Bonaparte es nombrado rey de España como José I', 'Junio de 1808'],
+    ['Se promulga la Constitución (Estatuto) de Bayona', 'Julio de 1808'],
+  ] },
+  // 2. La Guerra de la Independencia
+  { id: 'g-estallido', e: 'guerra', n: 'El levantamiento y las juntas', s: [
+    ['Las tropas francesas ocupan plazas españolas: la «invasión silenciosa»', 'Invierno de 1807 – 1808'],
+    ['Levantamiento del pueblo de Madrid, apoyado por Daoiz y Velarde', '2 de mayo de 1808'],
+    ['Surgen las Juntas locales y provinciales', 'Mayo – junio de 1808'],
+    ['Victoria del ejército español en Bailén', '19 de julio de 1808'],
+    ['José I abandona Madrid y se refugia en el norte', 'Agosto de 1808'],
+    ['Se forma la Junta Central Suprema, presidida por Floridablanca', 'Septiembre de 1808'],
+  ] },
+  { id: 'g-francesa', e: 'guerra', n: 'La contraofensiva francesa', s: [
+    ['Napoleón entra con la Grande Armée y repone a José I en Madrid', 'Noviembre – diciembre de 1808'],
+    ['Se extiende la guerra de guerrillas (El Empecinado, el Cura Merino, Espoz y Mina)', 'Desde 1809'],
+    ['La Junta Central se disuelve y deja el poder a una Regencia', 'Enero de 1810'],
+    ['Se reúnen las Cortes de Cádiz', 'Septiembre de 1810'],
+    ['Los franceses ocupan todas las ciudades importantes salvo Cádiz', '1811'],
+  ] },
+  { id: 'g-final', e: 'guerra', n: 'La ofensiva hispano-británica', s: [
+    ['Wellington toma Ciudad Rodrigo y Badajoz', 'Enero – abril de 1812'],
+    ['Napoleón invade Rusia y retira tropas de España', 'Junio de 1812'],
+    ['Victoria de los Arapiles', 'Julio de 1812'],
+    ['El ejército de José I abandona Andalucía', 'Agosto de 1812'],
+    ['Victoria de Vitoria', 'Junio de 1813'],
+    ['Victoria de San Marcial', 'Agosto de 1813'],
+  ] },
+  // 3. Las Cortes de Cádiz y la Constitución de 1812
+  { id: 'c-cortes', e: 'cadiz', n: 'Las Cortes se reúnen', s: [
+    ['La Junta Central se disuelve y nombra una Regencia de cinco miembros', 'Enero de 1810'],
+    ['La Regencia convoca Cortes y se eligen 223 diputados por sufragio indirecto', '1810'],
+    ['Primera sesión de las Cortes de Cádiz', '24 de septiembre de 1810'],
+    ['Decreto de igualdad jurídica de los españoles', 'Octubre de 1810'],
+    ['Decreto de libertad de imprenta', 'Noviembre de 1810'],
+  ] },
+  { id: 'c-leyes', e: 'cadiz', n: 'Las reformas de las Cortes', s: [
+    ['Abolición de la tortura', 'Abril de 1811'],
+    ['Supresión de los señoríos jurisdiccionales y del «vasallaje»', '6 de agosto de 1811'],
+    ['Ya no hace falta ser noble para entrar en los colegios militares', '17 de agosto de 1811'],
+    ['Se aprueba la Constitución, «La Pepa»', '19 de marzo de 1812'],
+    ['Abolición del «voto de Santiago»', 'Otoño de 1812'],
+    ['Abolición de la Inquisición', 'Febrero de 1813'],
+  ] },
+  { id: 'c-vida', e: 'cadiz', n: 'La vida de la Constitución de Cádiz', s: [
+    ['Las Cortes aprueban la Constitución', '1812'],
+    ['Fernando VII la deroga con el Decreto de Valencia', '1814'],
+    ['Riego la proclama y el rey tiene que jurarla', '1820'],
+    ['Los Cien Mil Hijos de San Luis acaban con ella', '1823'],
+    ['Vuelve como bandera de los progresistas en el Bienio Progresista', '1854'],
+    ['Inspira la revolución «La Gloriosa»', '1868'],
+  ] },
+  // 4. Fernando VII: retorno al absolutismo y Trienio Liberal
+  { id: 'a-vuelta', e: 'absolutismo', n: 'El regreso del rey', s: [
+    ['Fernando VII vuelve a España', 'Marzo de 1814'],
+    ['Manifiesto de los Persas', 'Abril de 1814'],
+    ['Decreto de Valencia: deroga la Constitución', '4 de mayo de 1814'],
+    ['Empieza el Congreso de Viena', 'Septiembre de 1814'],
+    ['Rusia, Austria y Prusia forman la Santa Alianza', 'Septiembre de 1815'],
+    ['Fracasa la reforma de Hacienda de Martín de Garay', '1816 – 1817'],
+  ] },
+  { id: 'a-riego', e: 'absolutismo', n: 'Del pronunciamiento de Riego al Trienio', s: [
+    ['Pronunciamientos liberales fracasados, uno cada año', '1814 – 1819'],
+    ['Se reúne en Cádiz un ejército para combatir en América', '1819'],
+    ['Riego proclama la Constitución en Cabezas de San Juan', '1 de enero de 1820'],
+    ['Fernando VII jura la Constitución: «Marchemos francamente…»', 'Marzo de 1820'],
+    ['Gobiernan los liberales moderados (Argüelles, Martínez de la Rosa)', '1820 – 1822'],
+    ['Los liberales exaltados llegan al poder', '1822'],
+  ] },
+  { id: 'a-fin', e: 'absolutismo', n: 'El fin del Trienio', s: [
+    ['La Santa Alianza decide intervenir en España', 'Finales de 1822'],
+    ['Los Cien Mil Hijos de San Luis entran en España', 'Abril de 1823'],
+    ['El gobierno se refugia en Cádiz llevándose al rey', 'Junio de 1823'],
+    ['Fin del Trienio: Fernando VII vuelve a ser rey absoluto', '1 de octubre de 1823'],
+  ] },
+  // 5. Fernando VII: la Década Ominosa
+  { id: 'o-represion', e: 'ominosa', n: 'Represión y conspiraciones', s: [
+    ['Fernando VII recupera el poder absoluto', 'Octubre de 1823'],
+    ['Se crean la policía y los Voluntarios Realistas; depuración de 80.000 funcionarios', '1823 – 1824'],
+    ['Revuelta de los agraviados («malcontents») en Cataluña', '1827'],
+    ['Torrijos desembarca en Málaga y es fusilado', '1831'],
+  ] },
+  { id: 'o-sucesion', e: 'ominosa', n: 'La cuestión sucesoria', s: [
+    ['El rey enviuda por tercera vez y se casa con María Cristina', '1829'],
+    ['Se publica la Pragmática Sanción', 'Marzo de 1830'],
+    ['Nace la princesa Isabel', 'Octubre de 1830'],
+    ['El rey, enfermo, deroga la Pragmática Sanción', 'Septiembre de 1832'],
+    ['María Cristina asume el gobierno y amnistía a los liberales', 'Octubre de 1832'],
+    ['El rey anula la derogación: Isabel será la heredera', 'Diciembre de 1832'],
+    ['Muere Fernando VII', 'Septiembre de 1833'],
+  ] },
+  // 6. La emancipación de la América española
+  { id: 'm-causas', e: 'america', n: 'Causas y primera fase', s: [
+    ['Independencia de Estados Unidos, ejemplo para los criollos', '1776'],
+    ['Rebelión de Túpac Amaru', '1780'],
+    ['Trafalgar corta los lazos navales con la metrópoli', '1805'],
+    ['Se forman Juntas de Defensa en América', '1810'],
+    ['Hidalgo y Morelos encabezan en México una sublevación indígena que es aplastada', '1810 – 1815'],
+    ['El general Morillo sofoca casi todos los focos independentistas', '1815 – 1816'],
+  ] },
+  { id: 'm-segunda', e: 'america', n: 'La independencia definitiva', s: [
+    ['San Martín independiza Argentina', '1816'],
+    ['San Martín libera Chile', '1817'],
+    ['Bolívar crea la Gran Colombia', '1819'],
+    ['Se subleva con Riego el ejército que iba a ir a América', '1820'],
+    ['Batalla de Carabobo', '1821'],
+    ['Doctrina Monroe: «América para los americanos»', '1823'],
+    ['Batalla de Ayacucho, ganada por Sucre', '1824'],
+  ] },
+];
