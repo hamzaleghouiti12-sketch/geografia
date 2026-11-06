@@ -58,7 +58,7 @@ const acierta = (resp, nombres) => nombres.some(n => parecido(resp, n));
 
 // ---------- Progreso (solo en este navegador) ----------
 const CLAVE_GUARDADO = 'geografia-v1';
-let P = { conceptos: {}, politico: {}, fisico: {}, coord: { ok: 0, n: 0 }, escala: { ok: 0, n: 0 }, coment: { a: 0, b: 0 }, borrador: { a: '', b: '' } };
+let P = { conceptos: {}, politico: {}, fisico: {}, coord: { ok: 0, n: 0 }, escala: { ok: 0, n: 0 }, coment: { a: 0, b: 0 }, borrador: { a: '', b: '' }, historia: {} };
 try { Object.assign(P, JSON.parse(localStorage.getItem(CLAVE_GUARDADO)) || {}); } catch (e) {}
 function guardar() { try { localStorage.setItem(CLAVE_GUARDADO, JSON.stringify(P)); } catch (e) {} }
 // Racha por elemento: sube al acertar, baja al fallar (0..3). Se usa para elegir qué preguntar.

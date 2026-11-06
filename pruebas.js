@@ -1,6 +1,6 @@
 // Pruebas del banco de contenido. Ejecutar antes de publicar: node pruebas.js
 global.window = global;
-require('./datos.js'); require('./datos-mapa.js');
+require('./datos.js'); require('./datos-mapa.js'); require('./datos-historia.js');
 const fs = require('fs');
 const src = fs.readFileSync(__dirname + '/app.js', 'utf8');
 // Carga las funciones de corrección de app.js sin el resto de la interfaz
@@ -53,6 +53,19 @@ for (const u of UNIDADES) {
 const sw = fs.readFileSync(__dirname + '/sw.js', 'utf8'), html = fs.readFileSync(__dirname + '/index.html', 'utf8');
 for (const [, f] of html.matchAll(/(?:src|href)="([^"#:]+)"/g)) if (!sw.includes(`'${f}'`)) mal('Falta en sw.js: ' + f);
 for (const f of ['tajogaite.jpg', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png']) if (!fs.existsSync(__dirname + '/' + f)) mal('Falta el archivo ' + f);
+// 10. Historia: etapas válidas, ids únicos, años de cuatro cifras y la pregunta no chiva su propio año
+const idsH = new Set();
+for (const f of FECHAS) {
+  if (idsH.has(f.id)) mal('Fecha repetida: ' + f.id); idsH.add(f.id);
+  if (!ETAPAS.some(e => e.id === f.e)) mal('Etapa desconocida en ' + f.id);
+  if (!f.a.length || f.a.length > 2 || f.a.some(y => !(y >= 1700 && y <= 1850))) mal('Años raros en ' + f.id);
+  if (f.a.length === 2 && f.a[0] >= f.a[1]) mal('Inicio después del fin en ' + f.id);
+  if (f.a.some(y => f.p.includes(String(y)))) mal('La pregunta chiva el año: ' + f.id);
+  if (!f.x || !f.f) mal('Falta la explicación o la fecha completa en ' + f.id);
+  if (!f.f.includes(String(f.a[0]))) mal('La fecha completa no coincide con el año en ' + f.id);
+}
+for (const e of ETAPAS) if (FECHAS.filter(f => f.e === e.id).length < 5) mal('Pocas fechas en la etapa ' + e.n);
+if (!nfc(fs.readFileSync(__dirname + '/datos-historia.js', 'utf8'))) mal('datos-historia.js no está en NFC');
 
 if (errores.length) { console.log(errores.join('\n')); console.log(`\n${errores.length} fallo(s): no se puede publicar`); process.exit(1); }
-console.log(`Todo correcto: ${CONCEPTOS.length} conceptos, ${UNIDADES.length} unidades, ${MAPA.prov.length} provincias. Se puede publicar.`);
+console.log(`Todo correcto: ${CONCEPTOS.length} conceptos, ${UNIDADES.length} unidades, ${MAPA.prov.length} provincias, ${FECHAS.length} fechas de Historia. Se puede publicar.`);

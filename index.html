@@ -70,6 +70,15 @@
       <p>a) Clasificación y tipología (0,5) · b) Comentario (2). Aprende el guion, escribe tu versión y comprueba qué ideas clave te faltan.</p></header>
     <div id="zona-comentario" style="display:grid;gap:14px"></div>
   </section>
+
+  <!-- HISTORIA -->
+  <section class="vista t-rosa" id="v-historia">
+    <header class="cab"><span class="eti">Historia · Tema 1</span><h2>La crisis del Antiguo Régimen</h2>
+      <p>Te describo el suceso o el tratado y tú escribes el año. Lo que falles vuelve a salir.</p></header>
+    <div class="chips desliza" id="etapas-historia"></div>
+    <p class="mut peq" id="etapa-historia" style="padding:0 6px;margin:0"></p>
+    <div id="zona-historia"></div>
+  </section>
 </main>
 
 <nav class="glass tabbar" id="tabbar" role="tablist" aria-label="Secciones">
@@ -82,6 +91,8 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="m3 6 6-2.5 6 2.5 6-2.5v14.5l-6 2.5-6-2.5-6 2.5z"/><path d="M9 3.5v14.5M15 6v14.5"/></svg>Mapas</button>
   <button class="tab" role="tab" data-v="comentario" aria-selected="false" style="--c:var(--melocoton)">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 20 4.5-1 11-11a2.1 2.1 0 0 0-3-3l-11 11z"/><path d="M14 6.5l3 3"/><path d="M13 20h8"/></svg>Comentario</button>
+  <button class="tab" role="tab" data-v="historia" aria-selected="false" style="--c:var(--rosa)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5"/><path d="M9.5 2.5h5"/></svg>Historia</button>
 </nav>
 <div class="glass toast" id="toast" role="status"></div>
 
@@ -89,6 +100,8 @@
 <script src="datos-mapa.js"></script>
 <script src="app.js"></script>
 <script src="mapa.js"></script>
+<script src="datos-historia.js"></script>
+<script src="historia.js"></script>
 <script>
   if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js');
 </script>
