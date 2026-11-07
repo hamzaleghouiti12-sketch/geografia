@@ -1,6 +1,6 @@
 // Funciona sin conexión: la app se guarda al instalarse y se actualiza cuando hay red.
 // Al cambiar CUALQUIER archivo, sube VERSION para que los móviles descarguen la nueva.
-const VERSION = 'geografia-v4';
+const VERSION = 'geografia-v5';
 const APP = ['./', 'index.html', 'estilo.css', 'app.js', 'mapa.js', 'datos.js', 'datos-mapa.js', 'datos-historia.js', 'historia.js', 'tajogaite.jpg',
   'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png'];
 

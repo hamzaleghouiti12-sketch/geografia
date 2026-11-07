@@ -32,8 +32,6 @@ window.FECHAS = [
     x: 'España pierde la flota que tardó un siglo en construir y los lazos con América se debilitan.' },
   { id: 'fontainebleau', e: 'borbonica', p: 'Tratado de Fontainebleau: prevé conquistar y repartir Portugal y abre España a las tropas de Napoleón.', a: [1807], f: '27 de octubre de 1807',
     x: 'Es la excusa para que los ejércitos franceses entren en la Península: la «invasión silenciosa».' },
-  { id: 'escorial', e: 'borbonica', p: 'Conspiración de El Escorial: el «partido fernandino» conspira contra Carlos IV y Godoy.', a: [1807], f: '1807',
-    x: 'Primer intento del príncipe Fernando y los nobles reaccionarios de forzar la caída de su padre.' },
   { id: 'aranjuez', e: 'borbonica', p: 'Motín de Aranjuez: cae Godoy y Carlos IV abdica en su hijo Fernando.', a: [1808], f: '17 de marzo de 1808',
     x: 'Provoca una grave crisis institucional que Napoleón aprovecha.' },
   { id: 'bayona', e: 'borbonica', p: 'Abdicaciones de Bayona: la Corona pasa a Napoleón, que nombra rey a su hermano José I.', a: [1808], f: 'Mayo de 1808',
